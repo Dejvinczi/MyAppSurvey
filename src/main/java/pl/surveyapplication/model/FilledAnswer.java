@@ -1,7 +1,6 @@
 package pl.surveyapplication.model;
 
 import javax.persistence.*;
-import java.io.IOException;
 
 /**
  * @author Dawid
@@ -81,6 +80,6 @@ public class FilledAnswer {
      * @param check informacje o zaznaczeniu tej odpowiedzi, true jeżeli zaznaczona lub false jeżeli nie.
      * */
     public void setCheck(boolean check) {
-        this.check = false;
+        this.check = check;
     }
 }

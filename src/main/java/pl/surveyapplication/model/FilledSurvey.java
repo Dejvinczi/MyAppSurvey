@@ -1,7 +1,6 @@
 package pl.surveyapplication.model;
 
 import javax.persistence.*;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -107,5 +106,14 @@ public class FilledSurvey {
      * */
     public void setFilledQuestions(List<FilledQuestion> filledQuestions) {
         this.filledQuestions = filledQuestions;
+    }
+
+    public FilledQuestion getFilledQuestion(int index){
+        return filledQuestions.get(index);
+    }
+
+    @Override
+    public String toString() {
+        return super.toString();
     }
 }

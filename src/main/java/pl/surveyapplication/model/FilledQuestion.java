@@ -31,7 +31,7 @@ public class FilledQuestion {
      * */
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "QUESTION_ORIGIN")
-    private List<FilledAnswer> filledAnswer;
+    private List<FilledAnswer> filledAnswers;
 
     /**
      * Konstruktor bezparametrowy
@@ -74,15 +74,19 @@ public class FilledQuestion {
      * Metoda liste uzupełnionych pytań.
      * @return filledAnswer lista uzupełnionych pytań.
      * */
-    public List<FilledAnswer> getFilledAnswer() {
-        return filledAnswer;
+    public List<FilledAnswer> getFilledAnswers() {
+        return filledAnswers;
     }
 
     /**
      * Metoda dodaje liste uzupełnionych pytań.
-     * @param filledAnswer lista uzupełnionych pytań.
+     * @param filledAnswers lista uzupełnionych pytań.
      * */
-    public void setFilledAnswer(List<FilledAnswer> filledAnswer){
-        this.filledAnswer = filledAnswer;
+    public void setFilledAnswers(List<FilledAnswer> filledAnswers){
+        this.filledAnswers = filledAnswers;
+    }
+
+    public FilledAnswer getFilledAnswer(int index) {
+        return filledAnswers.get(index);
     }
 }

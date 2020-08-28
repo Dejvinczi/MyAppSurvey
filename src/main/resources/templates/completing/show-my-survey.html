@@ -13,11 +13,10 @@
 <body>
 <center>
 
-    <form action="#" th:action="@{/user/surveys/survey}"method="post">
+    <form action="#" th:action="@{/user/surveys/survey}" th:object="${hash}" method="post">
         <div class="form-group col-md-8">
-            <label for="firstName" class="col-form-label">Token</label>
-            <input type="text" th:field="*{hash}" class="form-control"
-                   id="firstName" placeholder="token" />
+            <label class="col-form-label">Token</label>
+            <input type="text" id="token" name="token" th:value="${hash}">
         </div>
         <!--        WYSLIJ-->
         <div>

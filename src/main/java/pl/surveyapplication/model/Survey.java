@@ -114,7 +114,7 @@ public class Survey{
                 filledAnswer.setCheck(false);
                 filledAnswerList.add(filledAnswer);
             }
-            filledQuestion.setFilledAnswer(filledAnswerList);
+            filledQuestion.setFilledAnswers(filledAnswerList);
             filledQuestionList.add(filledQuestion);
         }
         filledSurvey.setFilledQuestions(filledQuestionList);

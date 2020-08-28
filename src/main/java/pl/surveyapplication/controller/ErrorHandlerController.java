@@ -36,7 +36,6 @@ public class ErrorHandlerController extends ResponseEntityExceptionHandler {
      * */
     @Value("${api_error_not_found_connection_details}")
     private String detailsConnection;
-
     /**
      * Metoda przechwutuje błędy przy wyszukiwaniu ankiety.
      * @param exception Błąd jaki ma się wyswietlić
