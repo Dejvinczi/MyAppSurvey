@@ -82,4 +82,12 @@ public class FilledAnswer {
     public void setCheck(boolean check) {
         this.check = check;
     }
+
+    @Override
+    public String toString() {
+        return "FilledAnswer{" +
+                ", answer='" + answer + '\'' +
+                ", check=" + check +
+                '}';
+    }
 }

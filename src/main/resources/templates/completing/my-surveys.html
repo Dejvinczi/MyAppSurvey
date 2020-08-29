@@ -36,7 +36,7 @@
                                 <td th:text="${mySurvey.getSurvey().getSurveyName()}"></td>
                                 <td th:text="${mySurvey.isDevoted()}"></td>
                                 <td th:if="${mySurvey.devoted == false}">
-                                    <a th:href="@{/user/surveys/try/{id}(id=${mySurvey.connectionId})}"
+                                    <a th:href="@{http://localhost:4200/?id={id}(id=${mySurvey.connectionId})}"
                                        class="btn btn-primary">
                                         <i class="fas fa-user-edit ml-2"></i>
                                     </a>

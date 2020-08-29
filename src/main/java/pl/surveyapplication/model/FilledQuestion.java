@@ -20,15 +20,9 @@ public class FilledQuestion {
     @GeneratedValue(strategy = GenerationType.TABLE)
     private Long questionId;
 
-    /**
-     * Zmienna przechowuje treść pytania
-     * */
     @Column(name = "QUESTION")
     private String question;
 
-    /**
-     * Lista przechowująca uzupełnione odpowiedzi
-     * */
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "QUESTION_ORIGIN")
     private List<FilledAnswer> filledAnswers;

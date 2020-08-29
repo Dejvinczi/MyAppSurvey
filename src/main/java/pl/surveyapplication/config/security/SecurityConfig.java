@@ -57,10 +57,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .authorizeRequests()
                 .antMatchers("/").permitAll()
+                .antMatchers("/user/surveys/**").permitAll()
+                .antMatchers("/user/surveys/finish-from-angular").permitAll()
                 .antMatchers("/home","/user/**/**").hasAnyRole("ADMIN","USER")
                 .antMatchers("/admin/**/**").hasAnyRole("ADMIN")
                 .and()
-                .formLogin();
+                .formLogin()
+                .and()
+                .cors();
 
         http.csrf().disable();
         http.headers().frameOptions().disable();
