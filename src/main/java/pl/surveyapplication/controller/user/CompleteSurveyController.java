@@ -1,6 +1,6 @@
 package pl.surveyapplication.controller.user;
 
-import org.apache.coyote.Response;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,13 +15,11 @@ import pl.surveyapplication.service.ConnectionService;
 import pl.surveyapplication.service.SurveyMagazinService;
 import pl.surveyapplication.service.UserService;
 
-import java.awt.*;
-import java.io.IOException;
-import java.net.URI;
-import java.net.URISyntaxException;
 import java.time.LocalDateTime;
 import java.util.Base64;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author Dawid
@@ -94,7 +92,7 @@ public class CompleteSurveyController {
     }
 
     @PostMapping("/finish-from-angular")
-    public ResponseEntity<String> receiveDataFromAngular(@RequestBody FilledSurvey filledSurvey) {
+    public ResponseEntity<?> receiveDataFromAngular(@RequestBody FilledSurvey filledSurvey) {
         StringBuilder sb = new StringBuilder();
         for (FilledQuestion question : filledSurvey.getFilledQuestions()) {
             for (FilledAnswer answer : question.getFilledAnswers()) {
@@ -103,42 +101,37 @@ public class CompleteSurveyController {
         }
         LocalDateTime date = LocalDateTime.now();
         sb.append(date);
-
         String hash = sb.toString();
         hash = Base64.getEncoder().encodeToString(sb.toString().getBytes());
         filledSurvey.setHash(hash);
 
-        System.out.println(hash);
-
-        return new ResponseEntity<>(hash, HttpStatus.CREATED);
+        Map<String, String> hashValue = new HashMap<>();
+        hashValue.put("hash", hash);
+        return new ResponseEntity<>(hashValue, HttpStatus.CREATED);
     }
 
-    /**
-     * Metoda pozwala na wyszukanie nam ankiety o wprowadzonym tokenie ze strony.
-     *
-     * @param filledSurvey Model do tworzenia obiektów w html
-     * @return String html, strone mozliwością wprowadzenia tokena.
-     */
-    @RequestMapping(path = "/finish{token}", method = RequestMethod.POST)
-    public String getHash(@ModelAttribute("filledSurvey") FilledSurvey filledSurvey, Model model, @PathVariable String token) {
+    @RequestMapping(path = "/finish/{hash}", method = RequestMethod.GET)
+    public void getHash(@PathVariable("hash") String hash, Model model) {
 
-        StringBuilder sb = new StringBuilder();
-        for (FilledQuestion question : filledSurvey.getFilledQuestions()) {
-            for (FilledAnswer answer : question.getFilledAnswers()) {
-                if (answer.isCheck()) sb.append(answer.getAnswer());
-            }
-        }
-        LocalDateTime date = LocalDateTime.now();
-        sb.append(date);
+//        StringBuilder sb = new StringBuilder();
+//        for (FilledQuestion question : filledSurvey.getFilledQuestions()) {
+//            for (FilledAnswer answer : question.getFilledAnswers()) {
+//                if (answer.isCheck()) sb.append(answer.getAnswer());
+//            }
+//        }
+//        LocalDateTime date = LocalDateTime.now();
+//        sb.append(date);
+//
+        System.out.println("wrócił jebany!");
+        System.out.println(hash);
+//        String token = sb.toString();
+//        token = Base64.getEncoder().encodeToString(sb.toString().getBytes());
+//        filledSurvey.setHash(token);
 
-        String hash = sb.toString();
-        hash = Base64.getEncoder().encodeToString(sb.toString().getBytes());
-        filledSurvey.setHash(hash);
-
-        model.addAttribute("hash", hash);
+        model.addAttribute("token", hash);
 //      surveyMagazinService.addSurveyToMagazin(filledSurvey);
 
-        return "completing/finish";
+//        return "completing/finish";
     }
 
 
